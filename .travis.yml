@@ -1,6 +1,23 @@
 language: node_js
 
 node_js:
-  - "node"
-  - 6
-  - 4
+  - node
+  - lts/boron
+  - lts/argon
+
+before_script:
+  - yarn compile
+
+before_deploy:
+  - yarn pack --filename package.tgz
+
+deploy:
+  provider: releases
+  api_key:
+    secure: U9/7DwYb7ERKrR7iNnUBaRETgvDyBbrLLf+dbBWi+FhbcmgVQGNGrpk+nHGzrt12nmulDdDgREF81OczD+QIi79T4GCyxdrSYaa9x9AZrw5ONYdfh5exdmlMDwQltoLNMb4L7XBTU32Yx2mCi0o3MWR1UH17eyYntcm0rPPJf8mXRbHbGWoXN3cfnKm+WbwZvYovfJilMlH6Se2LypZPAP5OgMSirowPnaLk4FPuEa6ILPelY9sJN5OZikoB5AfAAqui3RShGtzqvh6CQiNGYGcGfGco2AObtBaiNpPGYumO4G70EuNDCNXMDaXJoIEJWPD6Xx/ygKnosVBukGNIl1ci1pXkTpZuffKEshERQilDAzMFmbGXFWwt78Vay04+ljmkmfk4fRcMDDwQ0sHh4T7HOIs8vAiLYa9katLeC49MFSyBvSQFrKO4OxlkEy0mWRsavtAjW/mS0dRogPxoVwTkQejpkDYSbxnRq+bOCJ8nAmq4r1FuObA1pQIlb+Svq4hzCyRkteYxKzvZxh+4K4816GBCgZ/di5922BV8gGFj8EyMAX/09Ej8eDpKwLaZlON6q5rgwi8sh7z4GaAHrYmcy+noSM01YvHfrlBaZb96Vuc9HtLlPXNqCnc6+tp07TF9VNStwKL23nubKxdi0pRsnM2rtsg29sqDYW5IVBA=
+
+  skip_cleanup: true
+  file: package.tgz
+  on:
+    repo: starry-comet/comet-redis
+    tags: true
