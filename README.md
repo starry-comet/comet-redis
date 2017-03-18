@@ -14,7 +14,7 @@ This project has to main to give a lightweight redis client that allow to you to
 
 ## Usage
 
-To use comet-redis, below an example
+To use comet-redis, see the example below:
 
 ```ts
 import {injectable, inject} from 'comet-ioc'
