@@ -1,18 +1,40 @@
-import 'reflect-metadata'
-import { notEqual, ok } from 'assert'
+import { ok } from 'assert'
+import { bootstrap, inject, injectable } from 'comet-ioc'
 
-import { ARedisPublisher } from './redis/ARedisPublisher'
-import { ARedisSubscriber } from './redis/ARedisSubscriber'
-import { publisher, subscriber } from './index'
+import { RedisModule, RedisFactory, RedisPublisher, RedisSubscriber, RedisToken } from './index'
 
-describe('Test index', function(): void {
-  it('Get publisher', function(): void {
-    notEqual(publisher(), null, 'Publisher is null')
-    ok(publisher() instanceof ARedisPublisher, 'Publisher is not an instance of APublisher')
+@injectable()
+class App {
+  @inject(RedisPublisher)
+  $publisher: RedisPublisher
+
+  @inject(RedisSubscriber)
+  $subscriber: RedisSubscriber
+}
+
+describe('Imports', function() {
+  let app: App
+
+  before('load', function() {
+    app = bootstrap(App, {
+      imports: [
+        RedisModule
+      ],
+
+      providers: [{
+        provide: RedisToken,
+        useFactory() {
+          return RedisFactory()
+        }
+      }]
+    })
   })
 
-  it('Get subcriber', function(): void {
-    notEqual(subscriber(), null, 'Subscriber is null')
-    ok(subscriber() instanceof ARedisSubscriber, 'Subscriber is not an instance of APublisher')
+  it('Subscriber', function() {
+    ok(app.$subscriber instanceof RedisSubscriber, 'injection failed')
+  })
+
+  it('Publisher', function() {
+    ok(app.$publisher instanceof RedisPublisher, 'injection failed')
   })
 })

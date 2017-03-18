@@ -11,3 +11,55 @@ comet-redis
 ## Roles
 
 This project has to main to give a lightweight redis client that allow to you to easily subscribe and publish between components.
+
+## Usage
+
+To use comet-redis, below an example
+
+```ts
+import {injectable, inject} from 'comet-ioc'
+import {RedisPublisher, RedisSubscriber} from 'comet-redis'
+
+@injectable()
+export MainClass {
+  public constructor(
+    @inject(RedisPublisher) $publisher: RedisPublisher
+    @inject(RedisSubscriber) $subscriber: RedisSubscriber
+  ) {
+    $subscriber.subscribe<string>('channel', {
+      next(message: string): void {
+        console.log(message)
+      },
+
+      error(error: Error): void {},
+      complete(): void {}
+    })
+
+    setTimeout(() => {
+      $publisher.publish('channel', 'hi !')
+    }, 1000)
+  }
+}
+```
+
+```ts
+import {bootstrap, interfaces} from 'comet-ioc'
+import {RedisModule, RedisToken, RedisFactory, Redis} from 'comet-redis'
+
+import {MainClass} from './a/file'
+
+bootstrap(MainClass, {
+  imports: [RedisModule],
+  providers: [{
+    provide: RedisToken,
+    useFactory(context: interfaces.Context): Redis {
+      return RedisFactory('redis://127.0.0.1:6379')
+    }
+  }]
+})
+```
+
+result:
+```
+hi !
+```

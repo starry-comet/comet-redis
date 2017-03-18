@@ -1,15 +1,15 @@
-import { injectable, inject } from 'inversify'
-import * as Redis from 'ioredis'
+import { injectable, inject } from 'comet-ioc'
+import { Redis } from 'ioredis'
 
-import { ARedisPublisher } from '../ARedisPublisher'
+import { RedisToken } from '../RedisToken'
+import { IRedisPublisher } from '../IRedisPublisher'
 
 @injectable()
-export class RedisPublisher extends ARedisPublisher {
-
-  public publish<T>(channel: string, message: T): void {
-    this.$redis.publish(channel, message)
+export class RedisPublisher implements IRedisPublisher {
+  publish<T>(channel: string, content: T): void {
+    this.$redis.publish(channel, content)
   }
 
-  @inject(Redis)
-  private $redis: Redis.Redis
+  @inject(RedisToken)
+  private $redis: Redis
 }
