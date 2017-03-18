@@ -21,7 +21,7 @@ import {injectable, inject} from 'comet-ioc'
 import {RedisPublisher, RedisSubscriber} from 'comet-redis'
 
 @injectable()
-export MainClass {
+export class MainClass {
   public constructor(
     @inject(RedisPublisher) $publisher: RedisPublisher
     @inject(RedisSubscriber) $subscriber: RedisSubscriber
