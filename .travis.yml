@@ -12,12 +12,23 @@ before_deploy:
   - yarn pack --filename package.tgz
 
 deploy:
-  provider: releases
-  api_key:
-    secure: U9/7DwYb7ERKrR7iNnUBaRETgvDyBbrLLf+dbBWi+FhbcmgVQGNGrpk+nHGzrt12nmulDdDgREF81OczD+QIi79T4GCyxdrSYaa9x9AZrw5ONYdfh5exdmlMDwQltoLNMb4L7XBTU32Yx2mCi0o3MWR1UH17eyYntcm0rPPJf8mXRbHbGWoXN3cfnKm+WbwZvYovfJilMlH6Se2LypZPAP5OgMSirowPnaLk4FPuEa6ILPelY9sJN5OZikoB5AfAAqui3RShGtzqvh6CQiNGYGcGfGco2AObtBaiNpPGYumO4G70EuNDCNXMDaXJoIEJWPD6Xx/ygKnosVBukGNIl1ci1pXkTpZuffKEshERQilDAzMFmbGXFWwt78Vay04+ljmkmfk4fRcMDDwQ0sHh4T7HOIs8vAiLYa9katLeC49MFSyBvSQFrKO4OxlkEy0mWRsavtAjW/mS0dRogPxoVwTkQejpkDYSbxnRq+bOCJ8nAmq4r1FuObA1pQIlb+Svq4hzCyRkteYxKzvZxh+4K4816GBCgZ/di5922BV8gGFj8EyMAX/09Ej8eDpKwLaZlON6q5rgwi8sh7z4GaAHrYmcy+noSM01YvHfrlBaZb96Vuc9HtLlPXNqCnc6+tp07TF9VNStwKL23nubKxdi0pRsnM2rtsg29sqDYW5IVBA=
+  - provider: npm
+    email: contact@florentin-dubois.fr
+    api_key:
+      secure: ElARo7q5G5MyLdb07jO3FY1ZvNiZRf1XaoxyeVtIpAM3IzFY5+U3i8dkqUzA6vQttsJvU8BtWn9ywOdWXhOwhl6s1LuNB7VPSB5cG3k9jp1V9B4Kh13z2Sw8Kvo7/DGmb9Bm0Bguv47cXoB64x/qoy7NOsHqII+PzxQYzV7JODBo6zkSn/Ol0fR/P2j8J0FFx15a914O9op2fPw+LdVZWSBg9CdgaD4UBu/Or0rHhrEDlgJmWNpAsMbFV11jO0qkWVot+iXnnQWDTwaHeVMPQaEPXeaRlYiWTTJ7LeBG1DmNGmnjYzhKWzSfaf5drcVxsLfXkc0z2Lz/W29Qv3dqss0rGT3aU38HHUEFFlS0spOTZFLlcMgfTiD00nL0zJl3t09msXWGn7V/4gp3NiAqHtZV5y1uxxe0OlY+BR8l9nsYcjWPyuvJ2+ph8IT5ptIs/Id46Ljyb80AuyJAp+vdnIhK9XMONXHkBXYLA2CUK8BYQI4XhsiICH7ASSZu0ja5SSkOKPoFJaTG+ewLHrQ24TcZ3W/1nlbNpOIoCwDEvD5sLRBBep7RP6WBApC0XplCX1UzO76PqgOvzV4fl5jXdRYYy+bubPQ5xXSsbLM9/sJO0MSPsnnGIkmHvpyhKIUglBn6y9cw0uHqAI6G79UBuASYDd5uaX5HYCKt6qyyvGc=
 
-  skip_cleanup: true
-  file: package.tgz
-  on:
-    repo: starry-comet/comet-redis
-    tags: true
+    skip_cleanup: true
+    file: package.tgz
+    on:
+      tags: true
+      repo: starry-comet/comet-redis
+
+  - provider: releases
+    api_key:
+      secure: U9/7DwYb7ERKrR7iNnUBaRETgvDyBbrLLf+dbBWi+FhbcmgVQGNGrpk+nHGzrt12nmulDdDgREF81OczD+QIi79T4GCyxdrSYaa9x9AZrw5ONYdfh5exdmlMDwQltoLNMb4L7XBTU32Yx2mCi0o3MWR1UH17eyYntcm0rPPJf8mXRbHbGWoXN3cfnKm+WbwZvYovfJilMlH6Se2LypZPAP5OgMSirowPnaLk4FPuEa6ILPelY9sJN5OZikoB5AfAAqui3RShGtzqvh6CQiNGYGcGfGco2AObtBaiNpPGYumO4G70EuNDCNXMDaXJoIEJWPD6Xx/ygKnosVBukGNIl1ci1pXkTpZuffKEshERQilDAzMFmbGXFWwt78Vay04+ljmkmfk4fRcMDDwQ0sHh4T7HOIs8vAiLYa9katLeC49MFSyBvSQFrKO4OxlkEy0mWRsavtAjW/mS0dRogPxoVwTkQejpkDYSbxnRq+bOCJ8nAmq4r1FuObA1pQIlb+Svq4hzCyRkteYxKzvZxh+4K4816GBCgZ/di5922BV8gGFj8EyMAX/09Ej8eDpKwLaZlON6q5rgwi8sh7z4GaAHrYmcy+noSM01YvHfrlBaZb96Vuc9HtLlPXNqCnc6+tp07TF9VNStwKL23nubKxdi0pRsnM2rtsg29sqDYW5IVBA=
+
+    skip_cleanup: true
+    file: package.tgz
+    on:
+      repo: starry-comet/comet-redis
+      tags: true
