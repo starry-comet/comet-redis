@@ -1,14 +1,14 @@
 import { ok } from 'assert'
-import { bootstrap, inject, injectable } from 'comet-ioc'
+import { bootstrap, Inject, Injectable } from 'comet-ioc'
 
 import { RedisModule, RedisFactory, RedisPublisher, RedisSubscriber, RedisToken } from './index'
 
-@injectable()
+@Injectable()
 class App {
-  @inject(RedisPublisher)
+  @Inject(RedisPublisher)
   $publisher: RedisPublisher
 
-  @inject(RedisSubscriber)
+  @Inject(RedisSubscriber)
   $subscriber: RedisSubscriber
 }
 
@@ -31,10 +31,10 @@ describe('Imports', function() {
   })
 
   it('Subscriber', function() {
-    ok(app.$subscriber instanceof RedisSubscriber, 'injection failed')
+    ok(app.$subscriber instanceof RedisSubscriber, 'Injection failed')
   })
 
   it('Publisher', function() {
-    ok(app.$publisher instanceof RedisPublisher, 'injection failed')
+    ok(app.$publisher instanceof RedisPublisher, 'Injection failed')
   })
 })

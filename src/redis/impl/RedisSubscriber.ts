@@ -1,11 +1,11 @@
-import { injectable, inject } from 'comet-ioc'
+import { Injectable, Inject } from 'comet-ioc'
 import { Observer, Observable } from 'rxjs'
 import { Redis } from 'ioredis'
 
 import { RedisToken } from '../RedisToken'
 import { IRedisSubscriber } from '../IRedisSubscriber'
 
-@injectable()
+@Injectable()
 export class RedisSubscriber implements IRedisSubscriber {
     subscribe<T>(channel: string, observer: Observer<T>): void {
       Observable.create((observer: Observer<T>): void => {
@@ -21,6 +21,6 @@ export class RedisSubscriber implements IRedisSubscriber {
       }).subscribe(observer)
     }
 
-    @inject(RedisToken)
+    @Inject(RedisToken)
     private $redis: Redis
 }
