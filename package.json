@@ -1,6 +1,6 @@
 {
   "name": "comet-redis",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "lightweight redis client to communicate between components",
   "main": "build/src/index.js",
   "types": "build/declarations/index.d.ts",
